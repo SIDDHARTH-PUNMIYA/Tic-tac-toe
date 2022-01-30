@@ -34,7 +34,8 @@ public class Tictactoe implements ActionListener {
 			button_panel.add(jb[i]);
 			jb[i].setFont(new Font("MV Boli",Font.BOLD,100));
 			jb[i].setFocusable(false);
-			
+			System.out.print(jb[i].getText()+" ");
+			System.out.println();
 		}
 		text_panel.add(text);
 		frame.add(text_panel,BorderLayout.NORTH);
@@ -48,14 +49,15 @@ public class Tictactoe implements ActionListener {
 		if(e.getSource()==jb[i]) {
 			if(p1==true) {
 			jb[i].setText("X");
-			jb[i].setForeground(Color.RED);
-			//	jb[i].setEnabled(false);;
-			p1=false;
+				jb[i].setEnabled(false);
+				jb[i].setBackground(Color.RED);
+				
+				p1=false;
 			}
 			else {
 				jb[i].setText("O");
-			//	jb[i].setEnabled(false);
-				jb[i].setForeground(Color.GREEN);
+				jb[i].setEnabled(false);
+				jb[i].setBackground(Color.GREEN);
 				p1=true;
 			}
 		}
@@ -160,8 +162,22 @@ public class Tictactoe implements ActionListener {
 			disable();
 			 
 		}
+		else { int f=0;
+			for(int i=0;i<9;i++) {
+				System.out.println(jb[i].getText()+" ");
+				if(jb[i].getText()=="X" || jb[i].getText()=="O") {
+					f++;
+				}
+			}
+			if(f==9) {Ties();}
+		}
 	}
-    public void Xwins(int a,int b,int c) {
+    private void Ties() {
+    	text.setText("Game is Tied");
+    	disable();
+	}
+
+	public void Xwins(int a,int b,int c) {
     	text.setText("X Wins at position "+a+" "+b+" "+c);
     }
     public void Owins(int a,int b,int c) {
